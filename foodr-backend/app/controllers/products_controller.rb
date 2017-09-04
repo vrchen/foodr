@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
 
   def search_upc
     search_term = params[:search_term]
-    product = Product.find_by(upc: search_term)
+    product = Product.find_by(upc12: search_term) || Product.find_by(upc14: search_term)
     if product
       if params[:user_id]
         search = Search.create(user_id: params[:user_id], product_id: product.id, is_saved: false)
@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
     possible_matches = Product.fuzzy_search(name: search_term)
     matches = []
     possible_matches.each do |product|
-      matches << {id: product.id, name: product.name, upc: product.upc}
+      matches << {id: product.id, name: product.name, upc: product.upc12}
     end
     matches.any? ? matches : nil
   end

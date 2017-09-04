@@ -33,7 +33,9 @@ ActiveRecord::Schema.define(version: 20170801002325) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "upc"
+    t.string "upc14"
+    t.string "upc12"
+    t.string "brand"
     t.string "name"
     t.integer "score"
     t.string "img_url"
