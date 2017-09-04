@@ -1,6 +1,13 @@
-# User.delete_all
-# Product.delete_all
-# Ingredient.delete_all
+# SEED FROM CSV
+
+require 'csv'
+
+path = Rails.root.join('lib', 'seeds', 'Grocery_UPC_Database.csv')
+CSV.foreach(path, encoding: 'iso-8859-1:utf-8', headers: true, header_converters: :symbol) do |row|
+  product = Product.create(row.to_h)
+  product.img_url = 'https://www.jainsusa.com/images/store/landscape/not-available.jpg'
+  product.save
+end
 
 ## SEED USERS
 
@@ -13,7 +20,8 @@ User.create(email: 'xander@dbc.com', password: 'password')
 ## DORITOS
 
 doritos = Product.create(
-  upc: "0028400344371",
+  upc12: "0028400344371",
+  brand: "Doritos",
   name: "Doritos Nacho Cheese Tortilla Chips",
   score: 1,
   img_url: "https://images-na.ssl-images-amazon.com/images/I/41sEhSXmzXL.jpg"
@@ -205,7 +213,8 @@ doritos.ingredients << Ingredient.create(
 ## QUAKER CHEWY BAR
 
 chewy = Product.create(
-  upc: "03077504",
+  upc12: "03077504",
+  brand: "Quaker",
   name: "Quaker Chewy Chocolate Chip Bar",
   score: 3,
   img_url: "https://images-na.ssl-images-amazon.com/images/I/81wqeA8l9CL._SL1500_.jpg"
@@ -242,7 +251,8 @@ chewy.ingredients << Ingredient.create(
 ## NATURE VALLEY BAR
 
 nature_valley = Product.create(
-  upc: "0016000507661",
+  upc12: "0016000507661",
+  brand: "Nature Valley",
   name: "Nature Valley Peanut Butter Dark Chocolate Chewy Bar",
   score: 4,
   img_url: "https://d2ln0cvn4pv5w2.cloudfront.net/unsafe/1024x800/filters:quality(100):max_bytes(200000):fill(white)/dcmzfk78s4reh.cloudfront.net/1470334066593.jpg"
