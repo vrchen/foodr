@@ -599,16 +599,22 @@ class ProductPage extends Component {
         case 1:
           return ('F');
         default:
-          return ('Not Found');
+          return ('N/A');
       }
   }
 
   renderIngredientList() {
-    return this.props.foundProduct.ingredients.map(ingredient =>
-      <View key={ingredient.id}>
-        <IngredientModal ingredient = {ingredient} />
-      </View>
-    );
+    if (this.props.foundProduct.ingredients.length === 0) {
+      return(
+        <Text style={styles.textSmall}>N/A</Text>
+      )
+    } else {
+      return this.props.foundProduct.ingredients.map(ingredient =>
+        <View key={ingredient.id}>
+          <IngredientModal ingredient = {ingredient} />
+        </View>
+      );
+    }
   }
 
   render() {
