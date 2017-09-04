@@ -1,14 +1,3 @@
-# SEED FROM CSV
-
-require 'csv'
-
-path = Rails.root.join('lib', 'seeds', 'Grocery_UPC_Database.csv')
-CSV.foreach(path, encoding: 'iso-8859-1:utf-8', headers: true, header_converters: :symbol) do |row|
-  product = Product.create(row.to_h)
-  product.img_url = 'https://www.jainsusa.com/images/store/landscape/not-available.jpg'
-  product.save
-end
-
 ## SEED USERS
 
 dummy_user = User.create(email: 'user@email.com', password: 'password')
